@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vamsi Blogs — Sanctuary of Stories</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-hover: #6d28d9;
+      --glass-bg: rgba(255, 255, 255, 0.68);
+      --glass-hover: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.45);
+      --text-heading: #2e1065;
+      --text-body: #3b2a59;
+      --text-muted: #64748b;
+      --accent-violet: #8b5cf6;
+      --accent-pink: #ec4899;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--text-body);
+      background-color: #2b1f3d;
+      background-image: 
+        linear-gradient(rgba(30, 20, 48, 0.25), rgba(30, 20, 48, 0.45)), 
+        url('Dreamy Lavender Reading Nook.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Ambient Frosted Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 14px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(76, 29, 149, 0.08);
+    }
+
+    .brand-logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .brand-logo span {
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-body);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .auth-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn {
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.6rem 1.4rem;
+      border-radius: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .btn-signin {
+      color: var(--text-heading);
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-signin:hover {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .btn-signup {
+      background: linear-gradient(135deg, #7c3aed 0%, #6366f1 100%);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+    }
+
+    .btn-signup:hover {
+      background: linear-gradient(135deg, #6d28d9 0%, #4f46e5 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(124, 58, 237, 0.45);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 5% 3.5rem;
+      text-align: center;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .hero-tagline {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #6d28d9;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      text-shadow: 0 2px 12px rgba(255, 255, 255, 0.6);
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-body);
+      margin-bottom: 2.2rem;
+      font-weight: 500;
+      text-shadow: 0 1px 6px rgba(255, 255, 255, 0.4);
+    }
+
+    /* Live Search Box */
+    .search-box {
+      position: relative;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 13px 20px 13px 44px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      color: var(--text-heading);
+      outline: none;
+      font-size: 14px;
+      transition: all 0.25s ease;
+      box-shadow: 0 6px 18px rgba(76, 29, 149, 0.08);
+    }
+
+    .search-box input:focus {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.25);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      stroke: #7c6899;
+      pointer-events: none;
+    }
+
+    /* Main Container & Stories Grid */
+    .main-container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 5% 5rem;
+      width: 100%;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2rem;
+      color: var(--text-heading);
+      margin-bottom: 2rem;
+      display: inline-block;
+      text-shadow: 0 2px 8px rgba(255, 255, 255, 0.5);
+    }
+
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 24px;
+    }
+
+    .story-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 
+        0 12px 30px rgba(76, 29, 149, 0.10),
+        inset 0 1px 1px rgba(255, 255, 255, 0.7);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .story-card:hover {
+      transform: translateY(-4px);
+      background: var(--glass-hover);
+      box-shadow: 0 18px 40px rgba(76, 29, 149, 0.16);
+    }
+
+    .card-body {
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-meta-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .category-badge {
+      background: rgba(139, 92, 246, 0.15);
+      color: #6d28d9;
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .date-badge {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.45rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+      color: var(--text-heading);
+    }
+
+    .card-excerpt {
+      color: var(--text-body);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(139, 92, 246, 0.15);
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .author-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .author-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-heading);
+    }
+
+    .read-link {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .read-link:hover {
+      color: var(--primary-hover);
+      text-decoration: underline;
+    }
+
+    #noResultsNotice {
+      display: none;
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 50px 20px;
+      background: var(--glass-bg);
+      border-radius: 20px;
+      border: 1px dashed var(--glass-border);
+      backdrop-filter: blur(14px);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { padding-top: 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <a href="index.html" class="brand-logo">
+      📜 <span>Vamsi Blogs</span>
+    </a>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="explore.html">Explore</a></li>
+        <li><a href="chronicles.html">Chronicles</a></li>
+        <li><a href="authors.html">Authors</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+
+    <div class="auth-actions">
+      <a href="login.html" class="btn btn-signin">Sign In</a>
+      <a href="register.html" class="btn btn-signup">Get Started</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <p class="hero-tagline">Sanctuary of Narrative Explorers</p>
+    <h1 class="hero-title">Every Story Holds a Universe Waiting to Be Unfolded.</h1>
+    <p class="hero-subtitle">Step into a realm of curated chronicles, thoughts, and odysseys published by creators worldwide.</p>
+    
+    <div class="search-box">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+        <circle cx="11" cy="11" r="7"/>
+        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text" id="landingSearch" placeholder="Search chronicles by title, content, or author..." onkeyup="filterLandingStories()">
+    </div>
+  </section>
+
+  <!-- Main Content Grid -->
+  <main class="main-container">
+    <h2 class="section-title">Latest Chronicles</h2>
+
+    <div class="stories-grid" id="storiesGrid">
+      <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-heading); font-weight: 600;">
+        Fetching stories from library...
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let allStories = [];
+
+    // Fetch database stories via Servlet API
+    async function loadStories() {
+      const container = document.getElementById('storiesGrid');
+      try {
+        const response = await fetch('/blogapi/api/latest-stories');
+        if (!response.ok) throw new Error('Network error');
+        
+        allStories = await response.json();
+
+        if (!allStories || allStories.length === 0) {
+          container.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px; background: var(--glass-bg); border-radius: 20px; border: 1px dashed var(--glass-border);">
+              <h3 style="color: var(--text-heading);">No Stories Discovered Yet</h3>
+              <p style="color: var(--text-muted); font-size: 14px; margin-top: 6px;">Check back soon for newly published tales.</p>
+            </div>`;
+          return;
+        }
+
+        renderStories(allStories);
+
+      } catch (err) {
+        console.error(err);
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px; background: var(--glass-bg); border-radius: 20px; border: 1px dashed var(--glass-border);">
+            <h3 style="color: var(--text-heading);">Could not load stories</h3>
+            <p style="color: var(--text-muted); font-size: 14px; margin-top: 6px;">Please verify your database connection.</p>
+          </div>`;
+      }
+    }
+
+    // Render cards to DOM
+    function renderStories(stories) {
+      const container = document.getElementById('storiesGrid');
+      container.innerHTML = '';
+
+      stories.forEach(story => {
+        const excerpt = story.content.length > 140 ? story.content.substring(0, 140) + '...' : story.content;
+        const initial = story.authorName ? story.authorName.charAt(0).toUpperCase() : 'A';
+
+        const card = document.createElement('article');
+        card.className = 'story-card';
+        card.setAttribute('data-title', (story.title || '').toLowerCase());
+        card.setAttribute('data-author', (story.authorName || '').toLowerCase());
+        card.setAttribute('data-content', (story.content || '').toLowerCase());
+
+        card.innerHTML = `
+          <div class="card-body">
+            <div class="card-meta-top">
+              <span class="category-badge">Story #${story.id}</span>
+              <span class="date-badge">📅 ${story.postDate}</span>
+            </div>
+            <h3 class="card-title">${story.title}</h3>
+            <p class="card-excerpt">${excerpt}</p>
+            <div class="card-footer">
+              <div class="author-info">
+                <div class="author-avatar">${initial}</div>
+                <span class="author-name">${story.authorName}</span>
+              </div>
+              <a href="login.html" class="read-link">Read Story &rarr;</a>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Instant Real-time Search Filter
+    function filterLandingStories() {
+      const query = document.getElementById('landingSearch').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.story-card');
+      let visible = 0;
+
+      cards.forEach(card => {
+        const title = card.getAttribute('data-title') || '';
+        const author = card.getAttribute('data-author') || '';
+        const content = card.getAttribute('data-content') || '';
+
+        if (title.includes(query) || author.includes(query) || content.includes(query)) {
+          card.style.display = 'flex';
+          visible++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Run on load
+    window.addEventListener('DOMContentLoaded', loadStories);
+  </script>
+
+</body>
+</html>

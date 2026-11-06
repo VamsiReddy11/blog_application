@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authors | Vamsi Blogs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --glass-bg: rgba(255, 255, 255, 0.68);
+      --glass-hover: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.45);
+      --text-heading: #2e1065;
+      --text-body: #3b2a59;
+      --text-muted: #64748b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body {
+      min-height: 100vh;
+      color: var(--text-body);
+      background: linear-gradient(rgba(30, 20, 48, 0.25), rgba(30, 20, 48, 0.45)), url('Dreamy Lavender Reading Nook.png');
+      background-size: cover; background-position: center; background-attachment: fixed;
+      display: flex; flex-direction: column;
+    }
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 14px 5%; display: flex; justify-content: space-between; align-items: center;
+    }
+    .brand-logo { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 700; color: var(--text-heading); text-decoration: none; }
+    .brand-logo span { background: linear-gradient(135deg, #7c3aed, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-body); text-decoration: none; font-size: 0.95rem; font-weight: 600; }
+    .nav-links a.active, .nav-links a:hover { color: var(--primary); }
+    .auth-actions { display: flex; gap: 1rem; }
+    .btn { font-size: 0.9rem; font-weight: 600; padding: 0.6rem 1.4rem; border-radius: 12px; text-decoration: none; }
+    .btn-signin { color: var(--text-heading); border: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.6); }
+    .btn-signup { background: linear-gradient(135deg, #7c3aed, #6366f1); color: #fff; border: none; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 4rem 5%; width: 100%; flex: 1; }
+    .hero-text { text-align: center; margin-bottom: 3.5rem; }
+    .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--text-heading); margin-bottom: 0.5rem; }
+    .hero-text p { color: var(--text-body); font-size: 1.1rem; }
+
+    .authors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+    .author-card {
+      background: var(--glass-bg); backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border); border-radius: 20px; padding: 32px 24px;
+      text-align: center; box-shadow: 0 10px 25px rgba(76, 29, 149, 0.08);
+      transition: transform 0.25s, background 0.25s;
+    }
+    .author-card:hover { transform: translateY(-4px); background: var(--glass-hover); }
+    .author-img {
+      width: 76px; height: 76px; margin: 0 auto 16px; border-radius: 50%;
+      background: linear-gradient(135deg, #7c3aed, #ec4899); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; font-weight: 700; box-shadow: 0 6px 16px rgba(124, 58, 237, 0.3);
+    }
+    .author-card h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; color: var(--text-heading); margin-bottom: 4px; }
+    .author-role { font-size: 0.8rem; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 12px; }
+    .author-bio { font-size: 0.9rem; line-height: 1.6; color: var(--text-body); margin-bottom: 18px; }
+    .author-card a {
+      display: inline-block; padding: 8px 18px; border-radius: 10px;
+      background: rgba(124, 58, 237, 0.12); color: var(--primary);
+      text-decoration: none; font-weight: 600; font-size: 0.85rem;
+    }
+    .author-card a:hover { background: var(--primary); color: #fff; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="brand-logo">📜 <span>Vamsi Blogs</span></a>
+    <ul class="nav-links">
+      <li><a href="explore.html">Explore</a></li>
+      <li><a href="chronicles.html">Chronicles</a></li>
+      <li><a href="authors.html" class="active">Authors</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="auth-actions">
+      <a href="login.html" class="btn btn-signin">Sign In</a>
+      <a href="register.html" class="btn btn-signup">Get Started</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero-text">
+      <h1>Storytellers & Chronicles</h1>
+      <p>Meet the thinkers, dreamers, and engineers shaping this narrative space.</p>
+    </div>
+
+    <div class="authors-grid">
+      <div class="author-card">
+        <div class="author-img">V</div>
+        <h3>Vamsi Reddy</h3>
+        <p class="author-role">Founder & Chief Chronicler</p>
+        <p class="author-bio">Java full stack architect crafting storytelling APIs and quiet reading environments.</p>
+        <a href="login.html">View Stories</a>
+      </div>
+      <div class="author-card">
+        <div class="author-img">J</div>
+        <h3>Jagan</h3>
+        <p class="author-role">Contributing Editor</p>
+        <p class="author-bio">Writing speculative tales, architectural observations, and reflections on code clarity.</p>
+        <a href="login.html">View Stories</a>
+      </div>
+      <div class="author-card">
+        <div class="author-img">S</div>
+        <h3>Susan Brown</h3>
+        <p class="author-role">Narrative Resident</p>
+        <p class="author-bio">Specializing in seaside mysteries, coastal mythologies, and forgotten lighthouse lore.</p>
+        <a href="login.html">View Stories</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

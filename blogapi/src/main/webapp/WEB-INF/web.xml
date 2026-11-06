@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" 
+         version="4.0">
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>login.html</welcome-file>
+        <welcome-file>home.html</welcome-file> 
+        <welcome-file>register.html</welcome-file> 
+        <welcome-file>admindashboard.html</welcome-file> 
+        <welcome-file>index.html</welcome-file> 
+        <welcome-file>home.jsp</welcome-file> 
+        <welcome-file>createblog.jsp</welcome-file> 
+        <welcome-file>blogDetails.jsp</welcome-file> 
+        
+        <welcome-file>default.html</welcome-file> 
+        <welcome-file>default.jsp</welcome-file> 
+        <welcome-file>default.htm</welcome-file> 
+        <welcome-file>admindashboard.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- Login Servlet -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>blogapi.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <!-- Blog Servlet -->
+    <servlet>
+        <servlet-name>BlogServlet</servlet-name>
+        <servlet-class>blogapi.BlogServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BlogServlet</servlet-name>
+        <url-pattern>/blogs</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>blogapi.AdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/admindashboard</url-pattern>
+    </servlet-mapping>
+
+    <!-- Logout Servlet -->
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>blogapi.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <!-- Register Servlet -->
+    <servlet>
+    <servlet-name>RegisterServlet</servlet-name>
+    <servlet-class>blogapi.RegisterServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/register</url-pattern>
+</servlet-mapping>
+
+<!-- Blog Details Servlet -->
+    <servlet>
+        <servlet-name>BlogDetailsServlet</servlet-name>
+        <servlet-class>blogapi.BlogDetailsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BlogDetailsServlet</servlet-name>
+        <url-pattern>/details</url-pattern>
+    </servlet-mapping>
+    
+    
+    <!-- Public Stories API Endpoint -->
+    <servlet>
+        <servlet-name>PublicStoriesServlet</servlet-name>
+        <servlet-class>blogapi.PublicStoriesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PublicStoriesServlet</servlet-name>
+        <url-pattern>/api/latest-stories</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+    <servlet-name>BlogServlet</servlet-name>
+    <url-pattern>/blogs</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>BlogServlet</servlet-name>
+    <url-pattern>/home</url-pattern>
+</servlet-mapping>
+
+</web-app>

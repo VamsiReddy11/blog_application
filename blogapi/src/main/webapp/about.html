@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Vamsi Blogs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --glass-bg: rgba(255, 255, 255, 0.68);
+      --glass-border: rgba(255, 255, 255, 0.45);
+      --text-heading: #2e1065;
+      --text-body: #3b2a59;
+      --text-muted: #64748b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body {
+      min-height: 100vh;
+      color: var(--text-body);
+      background: linear-gradient(rgba(30, 20, 48, 0.25), rgba(30, 20, 48, 0.45)), url('Dreamy Lavender Reading Nook.png');
+      background-size: cover; background-position: center; background-attachment: fixed;
+      display: flex; flex-direction: column;
+    }
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 14px 5%; display: flex; justify-content: space-between; align-items: center;
+    }
+    .brand-logo { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 700; color: var(--text-heading); text-decoration: none; }
+    .brand-logo span { background: linear-gradient(135deg, #7c3aed, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-body); text-decoration: none; font-size: 0.95rem; font-weight: 600; }
+    .nav-links a.active, .nav-links a:hover { color: var(--primary); }
+    .auth-actions { display: flex; gap: 1rem; }
+    .btn { font-size: 0.9rem; font-weight: 600; padding: 0.6rem 1.4rem; border-radius: 12px; text-decoration: none; }
+    .btn-signin { color: var(--text-heading); border: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.6); }
+    .btn-signup { background: linear-gradient(135deg, #7c3aed, #6366f1); color: #fff; border: none; }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 4rem 5%; width: 100%; flex: 1; }
+    .about-card {
+      background: var(--glass-bg); backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border); border-radius: 24px;
+      padding: 48px 42px; box-shadow: 0 16px 40px rgba(76, 29, 149, 0.12);
+    }
+    .badge {
+      display: inline-block; background: rgba(124, 58, 237, 0.15); color: var(--primary);
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 4px 12px; border-radius: 20px; margin-bottom: 12px;
+    }
+    h1 { font-family: 'Playfair Display', serif; font-size: 2.6rem; color: var(--text-heading); margin-bottom: 1.4rem; line-height: 1.25; }
+    p { font-size: 1.05rem; line-height: 1.85; color: var(--text-body); margin-bottom: 1.4rem; }
+    
+    .tech-stack {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid rgba(124, 58, 237, 0.18);
+    }
+    .tech-pill {
+      background: rgba(255, 255, 255, 0.8); border: 1px solid var(--glass-border);
+      padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; color: var(--text-heading);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="brand-logo">📜 <span>Vamsi Blogs</span></a>
+    <ul class="nav-links">
+      <li><a href="explore.html">Explore</a></li>
+      <li><a href="chronicles.html">Chronicles</a></li>
+      <li><a href="authors.html">Authors</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+    </ul>
+    <div class="auth-actions">
+      <a href="login.html" class="btn btn-signin">Sign In</a>
+      <a href="register.html" class="btn btn-signup">Get Started</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <article class="about-card">
+      <span class="badge">Our Philosophy</span>
+      <h1>A Quiet Corner on the Open Web.</h1>
+      
+      <p>
+        <strong>Vamsi Blogs</strong> was conceived as an antidote to noisy feeds and fragmented attention. Drawing inspiration from ambient lavender reading nooks and candle-lit writing libraries, our platform provides writers and readers with an immersive sanctuary.
+      </p>
+
+      <p>
+        Every article is rendered like an unbound chapter: clean margins, distraction-free typography, and a frosted glass interface that adapts naturally to morning light or midnight contemplation.
+      </p>
+
+      <div class="tech-stack">
+        <span class="tech-pill">☕ Java Servlets & JSP</span>
+        <span class="tech-pill">🐬 MySQL Persistence</span>
+        <span class="tech-pill">🐱 Apache Tomcat</span>
+        <span class="tech-pill">🎨 Glassmorphism UI</span>
+      </div>
+    </article>
+  </main>
+</body>
+</html>

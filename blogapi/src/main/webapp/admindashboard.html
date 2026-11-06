@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - BlogAPI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(-45deg, #ff6b6b, #6c63ff, #00c9a7, #ffd166);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .dashboard-wrapper {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            z-index: 2;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        header h1 {
+            font-size: 36px;
+            font-weight: 800;
+        }
+
+        header span {
+            color: #FFD814;
+        }
+
+        .container {
+            background: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        form input[type="text"], 
+        form textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.2s;
+            background: #fff;
+        }
+
+        form input[type="text"]:focus, 
+        form textarea:focus {
+            border-color: #6c63ff;
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.25);
+        }
+
+        form textarea {
+            height: 18px;
+            min-height: 160px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        form button {
+            align-self: flex-start;
+            background: #FFD814;
+            border: 1px solid #FCD200;
+            border-radius: 25px;
+            padding: 12px 32px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #111;
+            cursor: pointer;
+            transition: .2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        form button:hover {
+            background: #F7CA00;
+            transform: translateY(-1px);
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #eee;
+            margin-bottom: 35px;
+        }
+
+        /* High-Intensity Story List Layout */
+        .story-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .story-item {
+            background-color: #fcfcfc;
+            border: 1px solid #eef0f2;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: #6c63ff;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .story-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(108, 99, 255, 0.1);
+            background-color: #fff;
+        }
+
+        .story-item:hover::before {
+            opacity: 1;
+        }
+
+        .story-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #111;
+            margin-bottom: 8px;
+            transition: color 0.2s;
+        }
+
+        .story-item:hover .story-title {
+            color: #6c63ff;
+        }
+
+        .story-meta {
+            font-size: 13px;
+            color: #777;
+            display: flex;
+            gap: 15px;
+        }
+
+        .story-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+            .container {
+                padding: 25px 20px;
+            }
+            form button {
+                width: 100%;
+                align-self: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        <header>
+            <h1>Blog<span>API</span> Dashboard</h1>
+        </header>
+
+        <div class="container">
+            <h2 class="section-title">Compose a Story</h2>
+            
+            <form action="/create-blog" method="POST">
+                <input type="text" name="title" placeholder="Give your story an intense title..." required />
+                <textarea name="content" placeholder="Type or paste your narrative here..." required></textarea>
+                
+                <!-- Keeps your dynamic Java backend author reference intact -->
+                <input type="hidden" name="author_id" value="${user.id}" />
+                
+                <button type="submit">Publish Story</button>
+            </form>
+
+            <hr>
+
+            <h2 class="section-title">Published Narratives</h2>
+            
+            <ul class="story-list">
+                <!-- Retains your standard JSTL loop mapping seamlessly -->
+                <c:forEach var="blog" items="${blogs}">
+                    <li class="story-item">
+                        <div class="story-title">${blog.title}</div>
+                        <div class="story-meta">
+                            <span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                Author ID: ${blog.author_id}
+                            </span>
+                            <span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                Active Intensity
+                            </span>
+                        </div>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - BlogAPI</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    background-color: #0b0f19;
+    background-image: 
+        linear-gradient(rgba(10, 15, 25, 0.45), rgba(10, 15, 25, 0.60)), 
+        url('login.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.main-layout {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    z-index: 2;
+    padding: 40px 0;
+}
+
+/* Left Hero Story Block */
+.story {
+    width: 50%;
+    color: #ffffff;
+}
+
+.story h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 56px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.story p {
+    font-size: 18px;
+    line-height: 1.75;
+    color: #e2e8f0;
+    max-width: 520px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+#changingTextWrapper {
+    height: 48px;
+    margin-top: 24px;
+}
+
+#changingText {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fde047;
+    text-shadow: 0 2px 12px rgba(253, 224, 71, 0.35);
+    display: inline-block;
+}
+
+.fade-in { animation: fadeTextIn 0.4s forwards; }
+.fade-out { animation: fadeTextOut 0.4s forwards; }
+
+@keyframes fadeTextIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeTextOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Form Container */
+.container {
+    width: 440px;
+    flex-shrink: 0;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.logo span {
+    color: #a5b4fc;
+}
+
+/* Pure Frosted Glass Card */
+.login-box {
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 24px;
+    padding: 38px 32px;
+    box-shadow: 
+        0 24px 48px rgba(0, 0, 0, 0.35),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+.login-box h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #ffffff;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: #cbd5e1;
+    margin-bottom: 22px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 7px;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #e2e8f0;
+}
+
+input[type="text"], 
+input[type="password"] {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    outline: none;
+    font-size: 14px;
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+input:focus {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: #818cf8;
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25);
+}
+
+/* Horizontal Side-by-Side CAPTCHA Container */
+.captcha-container {
+    margin-bottom: 22px;
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.captcha-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.captcha-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#captchaCanvas {
+    width: 140px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Circular Rotating Arrow Button */
+.rotate-btn {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    cursor: pointer;
+    color: #ffffff;
+    transition: all 0.25s ease;
+}
+
+.rotate-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.rotate-btn svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rotate-btn.spinning svg {
+    transform: rotate(360deg);
+}
+
+/* CAPTCHA Input placed beside the canvas */
+.captcha-row input[type="text"] {
+    margin-bottom: 0;
+    flex: 1;
+    min-width: 0;
+    height: 42px;
+    padding: 0 12px;
+    font-size: 13.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* Sign In Button */
+.login-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 13px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+}
+
+.login-btn:hover {
+    background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(79, 70, 229, 0.45);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 20px 0 16px;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.divider:not(:empty)::before { margin-right: 1em; }
+.divider:not(:empty)::after { margin-left: 1em; }
+
+.signup-redirect {
+    text-align: center;
+    font-size: 13px;
+    color: #e2e8f0;
+}
+
+.signup-redirect a {
+    color: #a5b4fc;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+    transition: color 0.2s ease;
+}
+
+.signup-redirect a:hover {
+    color: #c7d2fe;
+    text-decoration: underline;
+}
+
+.info {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 18px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+#error {
+    color: #fca5a5;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 8px;
+    padding: 9px 12px;
+    text-align: center;
+    margin-top: 14px;
+    font-weight: 500;
+    font-size: 12.5px;
+    display: none;
+}
+
+#toast {
+    visibility: hidden;
+    min-width: 260px;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(16, 185, 129, 0.5);
+    color: #34d399;
+    text-align: center;
+    border-radius: 10px;
+    padding: 12px 20px;
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    font-size: 13.5px;
+    font-weight: 500;
+    z-index: 10;
+}
+
+#toast.show {
+    visibility: visible;
+    animation: fadein .4s, fadeout .4s 2.6s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; bottom: 15px; }
+    to { opacity: 1; bottom: 30px; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; bottom: 30px; }
+    to { opacity: 0; bottom: 15px; }
+}
+
+@media (max-width: 900px) {
+    .main-layout {
+        flex-direction: column;
+        justify-content: center;
+        gap: 32px;
+        width: 100%;
+        padding: 24px;
+    }
+    .story {
+        width: 100%;
+        text-align: center;
+    }
+    .story p {
+        margin: 0 auto;
+    }
+    .container {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="main-layout">
+
+    <div class="story">
+        <h1>Share Your Story.</h1>
+        <p>Join a global collective of authors, thinkers, and chronicles. Read long-form literature, publish your chapters, and share your narratives.</p>
+        <div id="changingTextWrapper">
+            <span id="changingText">Write Stories.</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="logo">
+            <h1>Blog<span>API</span></h1>
+        </div>
+
+        <div class="login-box">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Enter your credentials to enter the library.</p>
+
+            <form action="login" method="POST" onsubmit="return validateCaptcha(event)">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter username" required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter password" required>
+
+                <!-- CAPTCHA Section: Horizontal Alignment -->
+                <div class="captcha-container">
+                    <div class="captcha-header">
+                        <label style="margin: 0;">Verification</label>
+                    </div>
+                    
+                    <div class="captcha-row">
+                        <!-- Canvas Display -->
+                        <canvas id="captchaCanvas" width="140" height="42"></canvas>
+                        
+                        <!-- Spinning Arrow Button -->
+                        <button type="button" class="rotate-btn" id="refreshBtn" onclick="triggerRefresh()" title="Regenerate Captcha">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12a9 9 0 1 1-2.6-6.4L21 8"/>
+                                <path d="M21 3v5h-5"/>
+                            </svg>
+                        </button>
+
+                        <!-- Input beside the Canvas -->
+                        <input type="text" id="captchaInput" placeholder="Code" maxlength="5" required autocomplete="off">
+                    </div>
+                </div>
+
+                <button class="login-btn" type="submit">
+                    Sign In
+                </button>
+            </form>
+
+            <div class="divider">or</div>
+
+            <div class="signup-redirect">
+                New to the Library?<a href="register.html">Begin your Journey</a>
+            </div>
+
+            <p class="info">
+                By entering, you confirm agreement with the BlogAPI Terms & Conditions.
+            </p>
+
+            <p id="error">Invalid username or password</p>
+        </div>
+    </div>
+
+</div>
+
+<div id="toast">
+    Registration successful! Please sign in.
+</div>
+
+<script>
+// URL Query Parameter Handling
+const urlParams = new URLSearchParams(window.location.search);
+const error = urlParams.get('error');
+const success = urlParams.get('success');
+
+if (error) {
+    const errorEl = document.getElementById("error");
+    errorEl.textContent = (error === "captcha") ? "Verification code is incorrect" : "Invalid username or password";
+    errorEl.style.display = "block";
+}
+
+if (success === "true") {
+    const toast = document.getElementById("toast");
+    toast.classList.add("show");
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
+}
+
+// Subtitle rotation animation
+const phrases = ["Write Stories.", "Read Chapters.", "Share Knowledge.", "Connect Writers."];
+let index = 0;
+const changingTextEl = document.getElementById("changingText");
+
+function rotateText() {
+    changingTextEl.className = "fade-out";
+    setTimeout(() => {
+        index = (index + 1) % phrases.length;
+        changingTextEl.textContent = phrases[index];
+        changingTextEl.className = "fade-in";
+    }, 400);
+}
+setInterval(rotateText, 3500);
+
+// Multi-Color Canvas CAPTCHA Implementation
+let generatedCaptcha = "";
+
+function getRandomPastelColor() {
+    const colors = [
+        "#f87171", // Soft Red
+        "#fb923c", // Soft Orange
+        "#fbbf24", // Soft Amber
+        "#4ade80", // Soft Green
+        "#38bdf8", // Sky Blue
+        "#a78bfa", // Purple
+        "#f472b6"  // Pink
+    ];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function generateCaptcha() {
+    const canvas = document.getElementById('captchaCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Tinted semi-dark background
+    ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Ambient noise speckles
+    for (let i = 0; i < 20; i++) {
+        ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
+        ctx.beginPath();
+        ctx.arc(
+            Math.random() * canvas.width, 
+            Math.random() * canvas.height, 
+            Math.random() * 1.5, 
+            0, 
+            Math.PI * 2
+        );
+        ctx.fill();
+    }
+
+    // Curving distortion stroke
+    ctx.strokeStyle = "rgba(165, 180, 252, 0.35)";
+    ctx.lineWidth = 1.8;
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height / 2 + (Math.random() * 10 - 5));
+    ctx.bezierCurveTo(
+        canvas.width * 0.3, Math.random() * canvas.height,
+        canvas.width * 0.7, Math.random() * canvas.height,
+        canvas.width, canvas.height / 2
+    );
+    ctx.stroke();
+    
+    // Generate 5 characters
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    generatedCaptcha = "";
+    for (let i = 0; i < 5; i++) {
+        generatedCaptcha += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    
+    ctx.font = "bold 20px 'Inter', sans-serif";
+    ctx.textBaseline = "middle";
+
+    for (let i = 0; i < generatedCaptcha.length; i++) {
+        const char = generatedCaptcha[i];
+        const x = 12 + (i * 25);
+        const y = canvas.height / 2 + (Math.random() * 4 - 2);
+        const angle = (Math.random() - 0.5) * 0.35;
+        
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+        
+        ctx.shadowColor = "rgba(255, 255, 255, 0.25)";
+        ctx.shadowBlur = 4;
+        
+        ctx.fillStyle = getRandomPastelColor();
+        ctx.fillText(char, 0, 0);
+        ctx.restore();
+    }
+}
+
+// Refresh Click with Icon Rotation Animation
+function triggerRefresh() {
+    const btn = document.getElementById('refreshBtn');
+    btn.classList.add('spinning');
+    generateCaptcha();
+    setTimeout(() => {
+        btn.classList.remove('spinning');
+    }, 400);
+}
+
+// Validation Handler
+function validateCaptcha(event) {
+    const userInput = document.getElementById('captchaInput').value.trim().toUpperCase();
+    const errorEl = document.getElementById('error');
+    
+    if (userInput !== generatedCaptcha) {
+        event.preventDefault();
+        errorEl.textContent = "Security code does not match. Please try again.";
+        errorEl.style.display = "block";
+        triggerRefresh();
+        document.getElementById('captchaInput').value = "";
+        return false;
+    }
+    return true;
+}
+
+window.onload = generateCaptcha;
+</script>
+
+</body>
+</html>

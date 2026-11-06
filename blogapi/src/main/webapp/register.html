@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register - BlogAPI</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    background-color: #0b0f19;
+    background-image: 
+        linear-gradient(rgba(10, 15, 25, 0.45), rgba(10, 15, 25, 0.60)), 
+        url('register\ page.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.main-layout {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    z-index: 2;
+    padding: 40px 0;
+}
+
+/* Left Hero Story Block */
+.story {
+    width: 50%;
+    color: #ffffff;
+}
+
+.story h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 56px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.story p {
+    font-size: 18px;
+    line-height: 1.75;
+    color: #e2e8f0;
+    max-width: 520px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+#changingTextWrapper {
+    height: 48px;
+    margin-top: 24px;
+}
+
+#changingText {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fde047;
+    text-shadow: 0 2px 12px rgba(253, 224, 71, 0.35);
+    display: inline-block;
+}
+
+.fade-in { animation: fadeTextIn 0.4s forwards; }
+.fade-out { animation: fadeTextOut 0.4s forwards; }
+
+@keyframes fadeTextIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeTextOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Form Container */
+.container {
+    width: 440px;
+    flex-shrink: 0;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.logo span {
+    color: #a5b4fc;
+}
+
+/* Transparent Frosted Glass Card */
+.register-box {
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 24px;
+    padding: 34px 30px;
+    box-shadow: 
+        0 24px 48px rgba(0, 0, 0, 0.35),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.register-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.register-box::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.register-box h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #ffffff;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: #cbd5e1;
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 12px;
+}
+
+.form-group {
+    margin-bottom: 14px;
+    flex: 1;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #e2e8f0;
+}
+
+/* Semi-transparent Glass Inputs */
+input, select {
+    width: 100%;
+    padding: 11px 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+    outline: none;
+    font-size: 14px;
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+select option {
+    background-color: #0f172a;
+    color: #ffffff;
+}
+
+input:focus, select:focus {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: #818cf8;
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25);
+}
+
+/* Radiant Indigo Gradient Button */
+.register-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 13px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+    margin-top: 8px;
+}
+
+.register-btn:hover {
+    background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(79, 70, 229, 0.45);
+}
+
+.register-btn:active {
+    transform: translateY(0);
+}
+
+.login-redirect {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 13px;
+    color: #e2e8f0;
+}
+
+.login-redirect a {
+    color: #a5b4fc;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+    transition: color 0.2s ease;
+}
+
+.login-redirect a:hover {
+    color: #c7d2fe;
+    text-decoration: underline;
+}
+
+.info {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 16px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Frosted Modal Error Popup */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    padding: 24px 28px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1000;
+    text-align: center;
+    width: 90%;
+    max-width: 360px;
+    transition: all 0.3s ease;
+}
+
+.popup.active {
+    display: block;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup p {
+    color: #fca5a5;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    margin-bottom: 18px;
+}
+
+.popup button {
+    padding: 8px 24px;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.popup button:hover {
+    background: linear-gradient(135deg, #4f46e5, #4338ca);
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    display: none;
+}
+
+.popup-overlay.active {
+    display: block;
+}
+
+@media (max-width: 900px) {
+    .main-layout {
+        flex-direction: column;
+        justify-content: center;
+        gap: 32px;
+        width: 100%;
+        padding: 24px;
+    }
+    .story {
+        width: 100%;
+        text-align: center;
+    }
+    .story p {
+        margin: 0 auto;
+    }
+    .container {
+        width: 100%;
+        max-width: 420px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="main-layout">
+
+    <div class="story">
+        <h1>Share Your Story.</h1>
+        <p>Join a global community of writers, developers, and creators. Publish your deep-dives, track your system updates, and connect with developers worldwide.</p>
+        <div id="changingTextWrapper">
+            <span id="changingText">Write APIs.</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="logo">
+            <h1>Blog<span>API</span></h1>
+        </div>
+
+        <div class="register-box">
+            <h2>Create an Account</h2>
+            <p class="subtitle">Join the chronicle community today.</p>
+            
+            <form action="/blogapi/register" method="post">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Choose a username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="First name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Last name" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="name@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select id="role" name="role" required>
+                        <option value="viewer">Viewer</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="register-btn">Register</button>
+            </form>
+
+            <div class="login-redirect">
+                Already have an account?<a href="login.html">Sign In</a>
+            </div>
+
+            <p class="info">
+                By registering, you agree to the BlogAPI Terms of Use and Privacy Policy.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<div id="popupOverlay" class="popup-overlay"></div>
+
+<div id="errorPopup" class="popup">
+    <p id="errorMessage">Registration failed. Please try again.</p>
+    <button onclick="closePopup()">Close</button>
+</div>
+
+<script>
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    function showErrorPopup() {
+        const error = getQueryParam('error');
+        if (error) {
+            const popup = document.getElementById('errorPopup');
+            const overlay = document.getElementById('popupOverlay');
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (error === 'duplicate') {
+                errorMessage.textContent = "Details already exist. Please try with new account info.";
+            } else {
+                errorMessage.textContent = "Username already exist. Please try with new username";
+            }
+
+            popup.classList.add('active');
+            overlay.classList.add('active');
+        }
+    }
+
+    function closePopup() {
+        document.getElementById('errorPopup').classList.remove('active');
+        document.getElementById('popupOverlay').classList.remove('active');
+    }
+
+    window.onload = showErrorPopup;
+
+    const phrases = ["Write APIs.", "Deploy Apps.", "Share Knowledge.", "Connect Developers."];
+    let index = 0;
+    const changingTextEl = document.getElementById("changingText");
+
+    function rotateText() {
+        changingTextEl.className = "fade-out";
+        
+        setTimeout(() => {
+            index = (index + 1) % phrases.length;
+            changingTextEl.textContent = phrases[index];
+            changingTextEl.className = "fade-in";
+        }, 400);
+    }
+
+    setInterval(rotateText, 3500);
+</script>
+</body>
+</html>

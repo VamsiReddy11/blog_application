@@ -1,0 +1,12 @@
+/target/
+/build/
+.metadata/
+.settings/
+.classpath
+.project
+Servers/
+*.class
+# Ignore extracted library sources
+/lib/mysql-connector-j-*/src/
+/lib/mysql-connector-j-*/docs/
+*.jar
